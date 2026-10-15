@@ -4,43 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#2563eb">
-<meta name="description" content="Free QR codes for websites, Wi-Fi and contacts.">
 <title>QR Quick - Free QR Generator</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172033}
-header{background:linear-gradient(135deg,#2563eb,#4f46e5);color:white;padding:28px 18px}
-header,main,footer{padding-left:16px;padding-right:16px}
-header h1{margin:0 0 10px}
-main{max-width:760px;margin:22px auto}
-.card{background:white;padding:20px;margin-bottom:18px;border-radius:16px;box-shadow:0 3px 15px #0000000c}
-.tabs{display:flex;gap:8px}
-button{padding:12px;border:0;border-radius:9px;font-size:15px;font-weight:bold;cursor:pointer}
+header{background:linear-gradient(135deg,#1d4ed8,#6d28d9);color:white;padding:24px 16px}
+.wrap{max-width:900px;margin:auto}
+.brand{display:flex;align-items:center;gap:12px;font-size:25px;font-weight:bold}
+.logo{width:48px;height:48px;background:white;color:#2563eb;border-radius:12px;display:grid;place-items:center;font-size:30px}
+header p{margin-bottom:0}
+main{max-width:900px;margin:22px auto;padding:0 14px}
+.card{background:white;padding:20px;border-radius:16px;margin-bottom:16px;box-shadow:0 4px 18px #0000000a}
+.tabs,.downloads{display:flex;gap:8px;flex-wrap:wrap}
+button{border:0;border-radius:9px;padding:12px;font-size:15px;font-weight:bold;cursor:pointer}
 .tab{flex:1;background:#eaf0ff;color:#1d4ed8}
 .tab.active,.primary{background:#2563eb;color:white}
 label{display:block;font-weight:bold;margin:14px 0 6px}
-input,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font-size:16px}
-input[type=checkbox]{width:auto}
+input,select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:9px;font:inherit;background:white}
+input[type=color]{height:48px;padding:4px}
+.fields.hidden{display:none}
 .primary{width:100%;margin-top:18px}
 .secondary{background:#eaf0ff;color:#1d4ed8}
-.hidden{display:none!important}
 .preview{text-align:center}
 #qrbox{width:100%;max-width:300px;aspect-ratio:1;margin:16px auto;border:1px dashed #cbd5e1;border-radius:12px;display:grid;place-items:center;overflow:hidden;background:white}
 #qrbox svg{width:100%;height:100%}
-#status{min-height:24px;margin:12px 0;color:#047857;overflow-wrap:anywhere}
-.downloads{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-footer{text-align:center;padding-top:18px;padding-bottom:25px;color:#64748b}
-@media(max-width:450px){.card{padding:15px}.tab{font-size:13px;padding:10px 4px}}
+#status{min-height:24px;margin:12px 0;overflow-wrap:anywhere}
+.downloads{justify-content:center}
+.history-item{border-top:1px solid #e2e8f0;padding:12px 0;overflow-wrap:anywhere}
+.history-item button{margin:5px 5px 0 0}
+.small{font-size:13px;color:#64748b}
+footer{text-align:center;padding:20px;color:#64748b}
 </style>
 </head>
 <body>
 <header>
-<h1>▦ QR Quick</h1>
-<h2>Make a QR code in seconds!</h2>
-<p>Create free QR codes for website links, Wi-Fi and contacts.</p>
+<div class="wrap">
+<div class="brand"><div class="logo">▦</div><span>QR Quick</span></div>
+<h1>Make a QR code in seconds!</h1>
+<p>Create, customize and download QR codes for links, Wi-Fi and contacts.</p>
+</div>
 </header>
 
-<main>
+<main class="wrap">
 <section class="card">
 <div class="tabs">
 <button class="tab active" data-type="url">🔗 URL</button>
@@ -48,13 +53,13 @@ footer{text-align:center;padding-top:18px;padding-bottom:25px;color:#64748b}
 <button class="tab" data-type="contact">👤 Contact</button>
 </div>
 
-<div id="urlFields">
+<div id="urlFields" class="fields">
 <label for="url">Website URL</label>
 <input id="url" placeholder="https://example.com">
 </div>
 
-<div id="wifiFields" class="hidden">
-<label for="ssid">Wi-Fi network name</label>
+<div id="wifiFields" class="fields hidden">
+<label for="ssid">Wi-Fi name</label>
 <input id="ssid" placeholder="My Wi-Fi">
 <label for="password">Wi-Fi password</label>
 <input id="password" type="password" placeholder="Password">
@@ -66,7 +71,7 @@ footer{text-align:center;padding-top:18px;padding-bottom:25px;color:#64748b}
 </select>
 </div>
 
-<div id="contactFields" class="hidden">
+<div id="contactFields" class="fields hidden">
 <label for="name">Full name</label>
 <input id="name" placeholder="Your name">
 <label for="phone">Phone</label>
@@ -77,12 +82,23 @@ footer{text-align:center;padding-top:18px;padding-bottom:25px;color:#64748b}
 <input id="website" placeholder="https://example.com">
 </div>
 
+<h3>Customize your QR</h3>
+<label for="fg">QR colour</label>
+<input type="color" id="fg" value="#172554">
+<label for="bg">Background colour</label>
+<input type="color" id="bg" value="#ffffff">
+
+<label for="logoFile">Add your own logo (optional)</label>
+<input type="file" id="logoFile" accept="image/png,image/jpeg,image/webp">
+<p class="small">Use a small square logo. High contrast helps QR codes scan.</p>
+
 <button id="generate" class="primary">Generate QR Code</button>
+<p class="small">Avoid putting passwords or sensitive information in a QR code you plan to share.</p>
 </section>
 
 <section class="card preview">
 <h2>Your QR Code</h2>
-<p>Generate a code, then download it.</p>
+<p>Preview, then save your QR code.</p>
 <div id="qrbox">Your QR code will appear here.</div>
 <div id="status" role="status" aria-live="polite"></div>
 <div class="downloads">
@@ -92,97 +108,90 @@ footer{text-align:center;padding-top:18px;padding-bottom:25px;color:#64748b}
 </section>
 
 <section class="card">
+<h2>📱 QR Code History</h2>
+<p class="small">Your recent QR codes are saved in this browser on this device.</p>
+<div id="history"><p class="small">Your generated QR codes will appear here.</p></div>
+<button id="clearHistory" class="secondary">Clear History</button>
+</section>
+
+<section class="card">
 <h3>How to use QR Quick</h3>
 <p>1. Choose URL, Wi-Fi or Contact.</p>
-<p>2. Enter the required details.</p>
-<p>3. Tap Generate QR Code.</p>
-<p>4. Download your QR code.</p>
+<p>2. Enter details and customize colours.</p>
+<p>3. Add an optional logo and generate.</p>
+<p>4. Download PNG or SVG and test-scan it.</p>
 </section>
 </main>
 
-<footer>© <span id="year"></span> QR Quick · Free QR Generator</footer>
+<footer>© <span id="year"></span> QR Quick · Free QR Code Generator</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
 (function(){
 const $=id=>document.getElementById(id);
+let type='url',svgData='',lastPayload='',logoData='';
 const tabs=[...document.querySelectorAll('.tab')];
-let type='url';
-let svgData='';
-
 $('year').textContent=new Date().getFullYear();
 
-tabs.forEach(button=>{
-button.addEventListener('click',()=>{
-type=button.dataset.type;
-tabs.forEach(t=>t.classList.toggle('active',t===button));
+tabs.forEach(b=>b.onclick=()=>{
+type=b.dataset.type;
+tabs.forEach(t=>t.classList.toggle('active',t===b));
 ['url','wifi','contact'].forEach(k=>{
 $(k+'Fields').classList.toggle('hidden',k!==type);
 });
 $('status').textContent='';
 });
+
+$('logoFile').addEventListener('change',()=>{
+const file=$('logoFile').files[0];
+if(!file){logoData='';return;}
+if(file.size>500000){
+$('status').textContent='Please choose a logo smaller than 500 KB.';
+$('logoFile').value='';
+logoData='';
+return;
+}
+const reader=new FileReader();
+reader.onload=()=>{logoData=reader.result;};
+reader.readAsDataURL(file);
 });
 
-function value(id){return $(id).value.trim();}
+function val(id){return $(id).value.trim();}
 
-function makePayload(){
+function payload(){
 if(type==='url'){
-let u=value('url');
+let u=val('url');
 if(!u)throw Error('Please enter a website URL.');
 if(!/^https?:\/\//i.test(u))u='https://'+u;
 let parsed;
-try{parsed=new URL(u);}catch(e){throw Error('Please enter a valid website URL.');}
+try{parsed=new URL(u);}catch(e){throw Error('Please enter a valid URL.');}
 if(!parsed.hostname.includes('.'))throw Error('Please enter a complete website address.');
 return u;
 }
-
 if(type==='wifi'){
-const s=value('ssid');
-const p=$('password').value;
-const sec=$('security').value;
+const s=val('ssid'),p=$('password').value,sec=$('security').value;
 if(!s)throw Error('Please enter your Wi-Fi name.');
 if(sec!=='nopass'&&!p)throw Error('Please enter your Wi-Fi password.');
 const esc=x=>x.replace(/([\\;,:"])/g,'\\$1');
 return 'WIFI:T:'+sec+';S:'+esc(s)+';P:'+(sec==='nopass'?'':esc(p))+';H:false;;';
 }
-
-const n=value('name');
+const n=val('name');
 if(!n)throw Error('Please enter your contact name.');
 const esc=x=>x.replace(/([\\;,])/g,'\\$1').replace(/\r?\n/g,'\\n');
 const lines=['BEGIN:VCARD','VERSION:3.0','FN:'+esc(n)];
-[['phone','TEL;TYPE=CELL:'],['email','EMAIL:'],['website','URL:']].forEach(([id,prefix])=>{
-const v=value(id);
-if(v)lines.push(prefix+esc(v));
+[['phone','TEL;TYPE=CELL:'],['email','EMAIL:'],['website','URL:']].forEach(([id,p])=>{
+const v=val(id);if(v)lines.push(p+esc(v));
 });
 lines.push('END:VCARD');
 return lines.join('\r\n');
 }
 
-function download(blob,name){
-const a=document.createElement('a');
-const url=URL.createObjectURL(blob);
-a.href=url;
-a.download=name;
-document.body.appendChild(a);
-a.click();
-a.remove();
-setTimeout(()=>URL.revokeObjectURL(url),1500);
-}
-
-$('generate').addEventListener('click',()=>{
-try{
-if(typeof qrcode!=='function'){
-throw Error('QR library did not load. Check your internet and reload.');
-}
-const q=qrcode(0,'M');
-q.addData(makePayload());
+function makeSvg(data,fg,bg,logo){
+const q=qrcode(0,'H');
+q.addData(data);
 q.make();
-
-const n=q.getModuleCount();
-const pad=4;
-const size=n+pad*2;
+const n=q.getModuleCount(),pad=4,size=n+pad*2;
 let squares='';
-
 for(let y=0;y<n;y++){
 for(let x=0;x<n;x++){
 if(q.isDark(y,x)){
@@ -190,54 +199,95 @@ squares+='<rect x="'+(x+pad)+'" y="'+(y+pad)+'" width="1" height="1"/>';
 }
 }
 }
+let center='';
+if(logo){
+const box=size*0.22,pos=(size-box)/2;
+center='<rect x="'+pos+'" y="'+pos+'" width="'+box+'" height="'+box+'" rx="2" fill="'+bg+'"/>'+
+'<image href="'+logo+'" x="'+(pos+box*.08)+'" y="'+(pos+box*.08)+'" width="'+(box*.84)+'" height="'+(box*.84)+'" preserveAspectRatio="xMidYMid meet"/>';
+}
+return '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 '+size+' '+size+'" shape-rendering="crispEdges"><rect width="'+size+'" height="'+size+'" fill="'+bg+'"/><g fill="'+fg+'">'+squares+'</g>'+center+'</svg>';
+}
 
-svgData='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+size+' '+size+'" shape-rendering="crispEdges"><rect width="'+size+'" height="'+size+'" fill="white"/><g fill="#111827">'+squares+'</g></svg>';
+function download(blob,name){
+const a=document.createElement('a'),url=URL.createObjectURL(blob);
+a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
 
+function getHistory(){
+try{return JSON.parse(localStorage.getItem('qrquickHistory')||'[]');}
+catch(e){return [];}
+}
+function saveHistory(data,svg){
+let list=getHistory();
+list.unshift({data:data,svg:svg,date:new Date().toLocaleString()});
+list=list.slice(0,10);
+try{localStorage.setItem('qrquickHistory',JSON.stringify(list));}
+catch(e){$('status').textContent='QR made, but browser history storage is full.';}
+renderHistory();
+}
+function renderHistory(){
+const list=getHistory(),el=$('history');
+el.innerHTML='';
+if(!list.length){el.textContent='No saved QR codes yet.';return;}
+list.forEach((item,i)=>{
+const row=document.createElement('div');row.className='history-item';
+const desc=document.createElement('div');
+desc.textContent=item.data.length>75?item.data.slice(0,75)+'…':item.data;
+const date=document.createElement('p');date.className='small';date.textContent=item.date;
+const restore=document.createElement('button');restore.className='secondary';restore.textContent='View';
+restore.onclick=()=>{
+svgData=item.svg;lastPayload=item.data;$('qrbox').innerHTML=svgData;
+$('png').disabled=false;$('svg').disabled=false;
+$('status').textContent='Saved QR loaded. Test-scan before sharing.';
+window.scrollTo({top:0,behavior:'smooth'});
+};
+row.append(desc,date,restore);el.appendChild(row);
+});
+}
+$('clearHistory').onclick=()=>{
+if(confirm('Delete all saved QR history?')){
+localStorage.removeItem('qrquickHistory');renderHistory();
+}
+};
+
+$('generate').onclick=()=>{
+try{
+if(typeof qrcode!=='function')throw Error('QR library did not load. Check internet and reload.');
+lastPayload=payload();
+svgData=makeSvg(lastPayload,$('fg').value,$('bg').value,logoData);
 $('qrbox').innerHTML=svgData;
 $('status').style.color='#047857';
-$('status').textContent='QR code created successfully! Test-scan before sharing.';
-$('png').disabled=false;
-$('svg').disabled=false;
+$('status').textContent='QR created successfully! Test-scan before sharing.';
+$('png').disabled=false;$('svg').disabled=false;
+saveHistory(lastPayload,svgData);
 }catch(e){
-$('status').style.color='#b91c1c';
-$('status').textContent=e.message||'Something went wrong. Please try again.';
+$('status').style.color='#b91c1c';$('status').textContent=e.message||'Something went wrong.';
 }
-});
+};
 
-$('svg').addEventListener('click',()=>{
-if(svgData){
-download(new Blob([svgData],{type:'image/svg+xml;charset=utf-8'}),'qr-quick-code.svg');
-}
-});
-
-$('png').addEventListener('click',()=>{
+$('svg').onclick=()=>{
+if(svgData)download(new Blob([svgData],{type:'image/svg+xml;charset=utf-8'}),'qr-quick-code.svg');
+};
+$('png').onclick=()=>{
 if(!svgData)return;
 const img=new Image();
 const url=URL.createObjectURL(new Blob([svgData],{type:'image/svg+xml'}));
-
 img.onload=()=>{
-const canvas=document.createElement('canvas');
-canvas.width=1024;
-canvas.height=1024;
-const ctx=canvas.getContext('2d');
-ctx.fillStyle='#ffffff';
-ctx.fillRect(0,0,1024,1024);
-ctx.drawImage(img,0,0,1024,1024);
-canvas.toBlob(blob=>{
+const c=document.createElement('canvas');c.width=c.height=1024;
+const ctx=c.getContext('2d');ctx.fillStyle=$('bg').value;
+ctx.fillRect(0,0,1024,1024);ctx.drawImage(img,0,0,1024,1024);
+c.toBlob(b=>{
 URL.revokeObjectURL(url);
-if(blob)download(blob,'qr-quick-code.png');
+if(b)download(b,'qr-quick-code.png');
 else $('status').textContent='PNG export failed. Try SVG.';
 },'image/png');
 };
-
-img.onerror=()=>{
-URL.revokeObjectURL(url);
-$('status').textContent='PNG export failed. Try SVG.';
-};
+img.onerror=()=>{URL.revokeObjectURL(url);$('status').textContent='PNG export failed. Try SVG.';};
 img.src=url;
-});
+};
+renderHistory();
 })();
 </script>
 </body>
-  </html>
-  
+</html>
